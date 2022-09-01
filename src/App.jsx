@@ -32,12 +32,23 @@ function App() {
       <h1>Word Counter</h1>
       <div id="main-textarea">
         <textarea
-          id="textarea"
+          className="text"
+          cols="30"
+          rows="10"
           onChange={({ target }) => setTextInput(() => target.value)}
+          placeholder="Enter paragraph here..."
         ></textarea>
-        <p>{word} = word</p>
-        <p>{sent} = sentance</p>
-        <p>{char} = char</p>
+        <div className="boxes">
+          <p className="words box" data-text="Words">
+            {word}
+          </p>
+          <p className="characters box" data-text="Characters">
+            {char}
+          </p>
+          <p className="sentance box" data-text="Sentance">
+            {sent}
+          </p>
+        </div>
       </div>
     </div>
   );
