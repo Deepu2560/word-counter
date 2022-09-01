@@ -14,12 +14,12 @@ function App() {
       setWord(() => 0);
       setSent(() => 0);
     } else {
-      let wordSplit = textInput.split(" ");
+      let wordSplit = textInput.split(/\s+/).filter((item) => item).length;
       let charCount = textInput.length;
       let sentanceCount = textInput.split(".");
 
       setChar(() => charCount);
-      setWord(() => wordSplit.length);
+      setWord(() => wordSplit);
       setSent(() => sentanceCount.length);
     }
   }, [textInput]);
@@ -45,7 +45,7 @@ function App() {
           <p className="characters box" data-text="Characters">
             {char}
           </p>
-          <p className="sentance box" data-text="Sentance">
+          <p className="sentance box" data-text="Sentence">
             {sent}
           </p>
         </div>
