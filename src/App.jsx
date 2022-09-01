@@ -1,34 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [textInput, setTextInput] = useState("");
 
+  const [word, setWord] = useState(0);
+  const [char, setChar] = useState(0);
+  const [sent, setSent] = useState(0);
+
+  useEffect(() => {
+    if (textInput == "") {
+      setChar(() => 0);
+      setWord(() => 0);
+      setSent(() => 0);
+    } else {
+      let wordSplit = textInput.split(" ");
+      let charCount = textInput.length;
+      let sentanceCount = textInput.split(".");
+
+      setChar(() => charCount);
+      setWord(() => wordSplit.length);
+      setSent(() => sentanceCount.length);
+    }
+  }, [textInput]);
+
+  useEffect(() => {
+    console.log(textInput);
+  }, [word]);
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>Word Counter</h1>
+      <div id="main-textarea">
+        <textarea
+          id="textarea"
+          onChange={({ target }) => setTextInput(() => target.value)}
+        ></textarea>
+        <p>{word} = word</p>
+        <p>{sent} = sentance</p>
+        <p>{char} = char</p>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
